@@ -77,7 +77,7 @@ title.pack(pady=(60, 30))
 
 instruction = tk.Label(
     alarm_page,
-    text="Enter the time you want to wake up",
+    text="Wanna wake up? \n DO THE MATH",
     font=("Arial", 15),
     bg="#111111",
     fg="white"
