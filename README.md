@@ -3,33 +3,35 @@
 
 
 # [Project Name] 🎯
-
+ACNA - Alarm Clock Nobody Asked for
 
 ## Basic Details
-### Team Name: [Name]
+### Team Name: Bits & Bytes
 
 
 ### Team Members
-- Team Lead: [Name] - [College]
-- Member 2: [Name] - [College]
-- Member 3: [Name] - [College]
+- Team Lead: Sania Prasad - SOE,CUSAT
+- Member 2: Sanin Roshan A - SOE,CUSAT
+
 
 ### Project Description
-[2-3 lines about what your project does]
+ACNA-Alarm Clock Nobody Asked for 
+Basically ACNA is an alarm clock app which makes waking up unnecessarily complicated rather than simply turning an alarm off.
+Why did we make it? Even we don't know.
 
 ### The Problem (that doesn't exist)
-[What ridiculous problem are you solving?]
+Most people absolutely hate alarm clocks, mostly because of annoying ringtones
 
 ### The Solution (that nobody asked for)
-[How are you solving it? Keep it fun!]
+Solution - Make an alarm clock which is even more annoying than regular alarm clocks. Not just the gut wrenchingly painful ringtones but also switch the use of the dismiss and snooze buttons. You are forced to wakeup but plot twist you can't turn the thing off, so sit and question your life choices. 
 
 ## Technical Details
 ### Technologies/Components Used
 For Software:
-- [Languages used]
-- [Frameworks used]
-- [Libraries used]
-- [Tools used]
+- Python
+- TKinter
+- TKinter,winsound
+- Pycharm
 
 For Hardware:
 - [List main components]
@@ -39,27 +41,35 @@ For Hardware:
 ### Implementation
 For Software:
 # Installation
-[commands]
+Download the setup file and allow necessary permissions to install
 
 # Run
-[commands]
+Double click to run the app
 
 ### Project Documentation
 For Software:
 
 # Screenshots (Add at least 3)
-![Screenshot1](Add screenshot 1 here with proper name)
-*Add caption explaining what this shows*
+<img width="1597" height="932" alt="Screenshot 2026-09-13 152023" src="https://github.com/user-attachments/assets/f41edd4d-200b-4ed6-9e09-c897d0d73a0c" />
+ACNA Home page 
+Shows current time and alarm setting function
 
-![Screenshot2](Add screenshot 2 here with proper name)
-*Add caption explaining what this shows*
 
-![Screenshot3](Add screenshot 3 here with proper name)
-*Add caption explaining what this shows*
+<img width="1591" height="932" alt="Screenshot 2026-09-13 152045" src="https://github.com/user-attachments/assets/498e3680-3f95-4ae8-b8b8-7557b55711a7" />
+Alarm setting page
+Enter seconds till your desired time, click on set alarm and wait.
+
+<img width="1590" height="935" alt="Screenshot 2026-09-13 152116" src="https://github.com/user-attachments/assets/fb4cd339-4b63-4a13-8cd2-768e852d13a9" />
+Alarm ringing page 
+When the set time is reached alarm rings showing a snooze and a dismiss button
 
 # Diagrams
-![Workflow](Add your workflow/architecture diagram here)
-*Add caption explaining your workflow*
+<img width="2720" height="2864" alt="alarm_clock_app_flow" src="https://github.com/user-attachments/assets/19328523-9536-4aab-98bc-bfe4f483b629" />
+### Workflow
+
+The user views the clock and sets an alarm by entering the required seconds. When the timer expires, the **alarm rings** with a custom sound. The **Dismiss and Snooze buttons are intentionally swapped**—Dismiss snoozes the alarm, while Snooze opens a progressively weird **quiz**. A wrong answer returns to the alarm, while a correct answer displays a **useless sleep report**. Finally, the user taps **“I’m Awake”** to return to the clock.
+
+
 
 For Hardware:
 
@@ -82,16 +92,15 @@ For Hardware:
 
 ### Project Demo
 # Video
-[Add your demo video link here]
-*Explain what the video demonstrates*
+https://drive.google.com/file/d/1fbbs-XDVZKh6qGdJ22xwwMSeULyRCC25/view?usp=sharing
+The basic working of the alarm. How to set and how the dismiss and snooze works.
 
 # Additional Demos
 [Add any extra demo materials/links]
 
 ## Team Contributions
-- [Name 1]: [Specific contributions]
-- [Name 2]: [Specific contributions]
-- [Name 3]: [Specific contributions]
+- Sania Prasad: Base model development and initial functionality implementation
+- Sanin Roshan: UI development and APK implementation
 
 ---
 Made with ❤️ at TinkerHub Useless Projects 
