@@ -310,6 +310,12 @@ class AlarmPanel(tk.Tk):
         )
 
         # ----------------------------------------------------
+        # FULLSCREEN TOGGLE
+        # ----------------------------------------------------
+        self.is_fullscreen = False
+        self.bind("<F11>", self.toggle_fullscreen)
+        self.bind("<Escape>", self.end_fullscreen)
+        self.configure(bg="black")
         # ALARM VARIABLES
         # ----------------------------------------------------
 
@@ -332,7 +338,6 @@ class AlarmPanel(tk.Tk):
         )
 
         self.container.pack(
-            fill="both",
             expand=True
         )
 
@@ -392,6 +397,20 @@ class AlarmPanel(tk.Tk):
         # Start on Page 1
         self.show_page1()
 
+
+    # ========================================================
+    # FULLSCREEN METHODS
+    # ========================================================
+
+    def toggle_fullscreen(self, event=None):
+        self.is_fullscreen = not self.is_fullscreen
+        self.attributes("-fullscreen", self.is_fullscreen)
+        return "break"
+
+    def end_fullscreen(self, event=None):
+        self.is_fullscreen = False
+        self.attributes("-fullscreen", False)
+        return "break"
 
     # ========================================================
     # PAGE 1
@@ -1398,19 +1417,26 @@ class AlarmPanel(tk.Tk):
         # ALARM TITLE / MESSAGE CANVAS TEXT
         # ----------------------------------------------------
 
-        self.ring_title_id = self.canvas3.create_text(
-            335,
-            120,
+        self.ring_title_id_shadow = self.canvas3.create_text(
+            642,
+            362,
             text="RISE AND SHINE\nPRINCESS",
-            font=(
-                "Segoe UI",
-                22,
-                "bold"
-            ),
+            font=("Segoe UI", 32, "bold"),
             fill="black",
             anchor="center",
             justify="center",
-            width=380
+            width=1000
+        )
+
+        self.ring_title_id = self.canvas3.create_text(
+            640,
+            360,
+            text="RISE AND SHINE\nPRINCESS",
+            font=("Segoe UI", 32, "bold"),
+            fill="white",
+            anchor="center",
+            justify="center",
+            width=1000
         )
 
         # ----------------------------------------------------
@@ -1518,12 +1544,21 @@ class AlarmPanel(tk.Tk):
     # DYNAMIC BACKGROUND & BACKEND LOGIC INTEGRATION
     # ========================================================
 
-    def update_ringing_title(self, text, font_size=20):
+    def update_ringing_title(self, text, font_size=32, text_color="white"):
+        outline_color = "white" if text_color == "black" else "black"
+        if hasattr(self, "ring_title_id_shadow"):
+            self.canvas3.itemconfig(
+                self.ring_title_id_shadow,
+                text=text,
+                font=("Segoe UI", font_size, "bold"),
+                fill=outline_color
+            )
         if hasattr(self, "ring_title_id"):
             self.canvas3.itemconfig(
                 self.ring_title_id,
                 text=text,
-                font=("Segoe UI", font_size, "bold")
+                font=("Segoe UI", font_size, "bold"),
+                fill=text_color
             )
 
     def update_stage_background(self, stage_name):
@@ -1541,6 +1576,7 @@ class AlarmPanel(tk.Tk):
             "we_made_question": ["we made question", "we made"],
             "confidential": ["confidential"],
             "alarm_doesnt_know": ["at this point", "even alarm", "doesnt know"],
+            "performance_report": ["performance report"],
             "bloodline": ["bloodline", "disappointed", "report"],
             "ring": ["ring", "alarm", "default"]
         }
@@ -1610,7 +1646,7 @@ class AlarmPanel(tk.Tk):
             sound_file = "Loud alarm.wav"
             self.update_stage_background("bloodline")
 
-        self.update_ringing_title(title_text, font_size=18)
+        self.update_ringing_title(title_text, font_size=30)
 
         try:
             sound_path = get_sound_path(sound_file)
@@ -1634,7 +1670,7 @@ class AlarmPanel(tk.Tk):
         except Exception:
             pass
 
-        self.update_ringing_title("SNOOZING... HEHE", font_size=22)
+        self.update_ringing_title("SNOOZING... HEHE", font_size=36)
         self.update_stage_background("snoozing")
         self.after(2000, self.alarm_ringing)
 
@@ -1730,7 +1766,7 @@ class AlarmPanel(tk.Tk):
                 except Exception:
                     pass
 
-                self.update_ringing_title("CORRECT.\n\nWe have absolutely no idea why.", font_size=18)
+                self.update_ringing_title("CORRECT.\n\nWe have absolutely no idea why.", font_size=28)
                 self.update_stage_background("ring")
                 self.after(2000, self.show_sleep_report)
 
@@ -1745,8 +1781,10 @@ class AlarmPanel(tk.Tk):
                 self.snooze_button.place_forget()
                 self.dismiss_button.place_forget()
 
+                t_color = "black"
+
                 if self.snooze_count == 1:
-                    message = "INCORRECT.\n\nLOL LOSER"
+                    message = ""
                     self.update_stage_background("loser")
                 elif self.snooze_count == 2:
                     message = "INCORRECT.\n\nWe made the question.\nWe still don't know."
@@ -1757,8 +1795,9 @@ class AlarmPanel(tk.Tk):
                 else:
                     message = "INCORRECT.\n\nAt this point, nobody knows.\nIncluding the alarm."
                     self.update_stage_background("alarm_doesnt_know")
+                    t_color = "white"
 
-                self.update_ringing_title(message, font_size=18)
+                self.update_ringing_title(message, font_size=28, text_color=t_color)
                 self.after(3000, self.alarm_ringing)
 
         submit_button = tk.Button(
@@ -1792,7 +1831,7 @@ class AlarmPanel(tk.Tk):
         )
 
         self.update_ringing_title(report_msg, font_size=13)
-        self.update_stage_background("bloodline")
+        self.update_stage_background("performance_report")
 
         if not hasattr(self, "awake_button") or not self.awake_button:
             self.awake_button = tk.Button(
