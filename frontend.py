@@ -312,7 +312,7 @@ class AlarmPanel(tk.Tk):
 
         super().__init__()
 
-        self.title("Alarm")
+        self.title("ACNA - Alarm Clock Nobody Asked for")
 
         self.geometry(
             f"{W}x{H}"

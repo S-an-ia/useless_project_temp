@@ -1,4 +1,4 @@
-﻿"""
+"""
 Useless Alarm Clock — Self-Contained Windows Installer
 =======================================================
 This script, when bundled with PyInstaller, becomes
@@ -23,13 +23,13 @@ from pathlib import Path
 
 
 # ── Constants ────────────────────────────────────────────────
-APP_NAME       = "Useless Alarm Clock"
+APP_NAME       = "ACNA (Alarm Clock Nobody Asked for)"
 APP_VERSION    = "1.0"
 PUBLISHER      = "Sanin"
-EXE_NAME       = "UselessAlarmClock.exe"
-INSTALL_SUBDIR = "UselessAlarmClock"
+EXE_NAME       = "ACNA.exe"
+INSTALL_SUBDIR = "ACNA"
 UNINSTALL_EXE  = "Uninstall.exe"
-REG_KEY        = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\UselessAlarmClock"
+REG_KEY        = r"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\ACNA"
 
 DARK_BG        = "#111111"
 ACCENT         = "#59c878"
