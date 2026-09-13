@@ -15,7 +15,7 @@ ACNA - Alarm Clock Nobody Asked for
 
 
 ### Project Description
-ACNA-Alarm Clock Nobody Asked for 
+ACNA-Alarm Clock Nobody Asked for. 
 Basically ACNA is an alarm clock app which makes waking up unnecessarily complicated rather than simply turning an alarm off.
 Why did we make it? Even we don't know.
 
