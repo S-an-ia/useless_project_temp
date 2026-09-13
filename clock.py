@@ -2,6 +2,7 @@ import tkinter as tk
 from datetime import datetime
 import winsound
 
+
 root = tk.Tk()
 
 root.title("Useless Alarm Clock")
@@ -78,7 +79,7 @@ title.pack(pady=(60, 30))
 
 instruction = tk.Label(
     alarm_page,
-    text="Wanna wake up? \n DO THE MATH",
+    text="Wanna wake up? \n ENTER SECONDS",
     font=("Arial", 15),
     bg="#111111",
     fg="white"
@@ -102,16 +103,42 @@ def alarm_ringing():
 
     ringing_page.pack(fill="both", expand=True)
 
-    if snooze_count > 5:
+    if snooze_count == 0:
         ringing_title.config(
-            text="⏰ I'M DONE"
+            text="⏰ RISE AND SHINE PRINCESS"
         )
+        winsound.Beep(800, 500)
+
+    elif snooze_count == 1:
+        ringing_title.config(
+            text="SIKE YOU SNOOZED HEHE"
+        )
+        winsound.Beep(1000, 500)
+
+    elif snooze_count == 2:
+        ringing_title.config(
+            text="Okay I'll dismiss next time"
+        )
+        winsound.Beep(1200, 700)
+
+    elif snooze_count == 3:
+        ringing_title.config(
+            text="Next time for sure"
+
+        )
+        winsound.Beep(1500, 800)
+
+    elif snooze_count == 4:
+        ringing_title.config(
+            text="Get Up Plis"
+        )
+        winsound.Beep(1800, 1000)
+
     else:
         ringing_title.config(
-            text="⏰ WAKE UP!!!"
+            text="ACHIEVEMENT UNLOCKED!! \n SUCCESSFULLY DISAPPOINTED THE ENTIRE BLOODLINE"
         )
-
-    winsound.Beep(1000, 1000)
+        winsound.Beep(2000, 1500)
 def set_alarm():
     try:
         seconds = int(seconds_entry.get())
@@ -158,7 +185,7 @@ ringing_page = tk.Frame(root, bg="#111111")
 
 ringing_title = tk.Label(
     ringing_page,
-    text="⏰ WAKE UP!!!",
+    text="⏰ RISE AND SHINE PRINCESS",
     font=("Arial", 40, "bold"),
     bg="#111111",
     fg="white"
@@ -166,14 +193,7 @@ ringing_title = tk.Label(
 ringing_title.pack(pady=(80, 20))
 
 
-ringing_message = tk.Label(
-    ringing_page,
-    text="YOUR ALARM IS RINGING",
-    font=("Arial", 18),
-    bg="#111111",
-    fg="white"
-)
-ringing_message.pack(pady=10)
+
 
 
 # This is the ACTUAL snooze function
@@ -184,36 +204,201 @@ def actual_snooze():
 
     winsound.PlaySound(None, winsound.SND_PURGE)
 
-    if snooze_count == 1:
-        message = "SIKE YOU SNOOZED HEHE"
 
-    elif snooze_count == 2:
-        message = "Okay I'll dismiss next time"
 
-    elif snooze_count == 3:
-        message = "Next time for sure"
 
-    elif snooze_count == 4:
-        message = "Get Up Plis"
-
-    else:
-        message = "ACHIEVEMENT UNLOCKED!! \n SUCCESSFULLY DISAPPOINTED THE ENTIRE BLOODLINE"
-
-    ringing_message.config(text=message)
-
-    root.after(5000, alarm_ringing)
+    root.after(2000, alarm_ringing)
 
 
 # This is the ACTUAL dismiss function
+# This is the ACTUAL dismiss function
+# This is the ACTUAL dismiss function
 def actual_dismiss():
-    winsound.PlaySound(None, winsound.SND_PURGE)
+    math_page = tk.Toplevel(root)
+    math_page.title("PROVE IT")
+    math_page.geometry("500x350")
+    math_page.configure(bg="#111111")
 
-    ringing_message.config(
-        text="ALARM DEFEATED \n YOU WIN!!"
+    # Difficulty increases with snooze count
+    if snooze_count == 0:
+        question_text = "What is 7 + 4?"
+        options = ["9", "10", "11", "12"]
+        answer = "11"
+
+    elif snooze_count == 1:
+        question_text = "How many pigeons are needed to carry a refrigerator?"
+        options = ["3", "17", "42", "Obviously 900"]
+        answer = "42"
+
+    elif snooze_count == 2:
+        question_text = "What is the emotional temperature of a confused spoon?"
+        options = ["37°C", "Tuesday", "42°C", "Cold"]
+        answer = "42°C"
+
+    elif snooze_count == 3:
+        question_text = "How many bananas fit inside the concept of Tuesday?"
+        options = ["7", "∞", "Tuesday bananas", "None"]
+        answer = "∞"
+
+    elif snooze_count == 4:
+        question_text = "What is the GPA of a mosquito that never attended college?"
+        options = ["0.0", "4.0", "69.0", "It dropped out"]
+        answer = "It dropped out"
+
+    else:
+        question_text = "What is the square root of your current regret?"
+        options = ["2", "7", "69", "Yes"]
+        answer = "Yes"
+
+    question = tk.Label(
+        math_page,
+        text=question_text,
+        font=("Arial", 17, "bold"),
+        bg="#111111",
+        fg="white",
+        wraplength=450,
+        justify="center"
     )
+    question.pack(pady=20)
 
-    root.after(1500, go_to_clock)
 
+
+    selected_answer = tk.StringVar(value="")
+
+    option_circles = {}
+
+    def select_option(value):
+        selected_answer.set(value)
+
+        # Reset all circles
+        for circle in option_circles.values():
+            circle.config(text="○")
+
+        # Fill selected circle
+        option_circles[value].config(text="●")
+
+    for option in options:
+        option_frame = tk.Frame(
+            math_page,
+            bg="#111111"
+        )
+        option_frame.pack(anchor="center", pady=3)
+
+        circle = tk.Label(
+            option_frame,
+            text="○",
+            font=("Arial", 18),
+            bg="#111111",
+            fg="white"
+        )
+        circle.pack(side="left")
+
+        option_label = tk.Label(
+            option_frame,
+            text=option,
+            font=("Arial", 14),
+            bg="#111111",
+            fg="white"
+        )
+        option_label.pack(side="left", padx=5)
+
+        option_circles[option] = circle
+
+        circle.bind(
+            "<Button-1>",
+            lambda event, value=option: select_option(value)
+        )
+
+        option_label.bind(
+            "<Button-1>",
+            lambda event, value=option: select_option(value)
+        )
+
+        option_frame.bind(
+            "<Button-1>",
+            lambda event, value=option: select_option(value)
+        )
+
+    def check_answer():
+        global snooze_count
+
+        user_answer = selected_answer.get()
+
+        if user_answer == answer:
+
+            math_page.destroy()
+
+            winsound.PlaySound(
+                None,
+                winsound.SND_PURGE
+            )
+
+            ringing_title.config(
+                font=("Arial", 25, "bold"),
+                text="CORRECT.\n\n"
+                     "We have absolutely no idea why."
+            )
+
+            root.after(2000, show_sleep_report)
+
+        else:
+
+            math_page.destroy()
+
+            snooze_count += 1
+
+            winsound.PlaySound(
+                None,
+                winsound.SND_PURGE
+            )
+            dismiss_button.pack_forget()
+            snooze_button.pack_forget()
+
+            if snooze_count == 1:
+
+                message = (
+                    "INCORRECT.\n\n"
+                    "LOL LOSER"
+                )
+
+            elif snooze_count == 2:
+
+                message = (
+                    "INCORRECT.\n\n"
+                    "We made the question.\n"
+                    "We still don't know."
+                )
+
+            elif snooze_count == 3:
+
+                message = (
+                    "INCORRECT.\n\n"
+                    "The answer has been\n"
+                    "classified as confidential."
+                )
+
+            else:
+
+                message = (
+                    "INCORRECT.\n\n"
+                    "At this point, nobody knows.\n"
+                    "Including the alarm."
+                )
+
+            ringing_title.config(
+                font=("Arial", 25, "bold"),
+                text=message
+            )
+
+            root.after(3000, alarm_ringing)
+
+    submit_button = tk.Button(
+        math_page,
+        text="SUBMIT",
+        font=("Arial", 14, "bold"),
+        command=check_answer
+    )
+    submit_button.pack(pady=10)
 
 # SWAPPED BUTTONS
 dismiss_button = tk.Button(
@@ -232,6 +417,61 @@ snooze_button = tk.Button(
     command=actual_dismiss
 )
 snooze_button.pack(pady=15)
+
+
+
+# ---------------- FINAL SLEEP REPORT ----------------
+
+def show_sleep_report():
+
+    # Remove the old buttons
+    for widget in ringing_page.winfo_children():
+        if widget != ringing_title:
+            widget.destroy()
+
+    bloodline = min(100, snooze_count * 17 + 5)
+    productivity = max(0, 100 - snooze_count * 13)
+
+    filled = productivity // 5
+    empty = 20 - filled
+
+    ringing_title.config(
+        font=("Arial", 16, "bold"),
+        text=f"📊 YOUR SLEEP REPORT\n\n"
+             f"Snoozes: {snooze_count}   "
+             f"Math Problems: {snooze_count + 1}\n"
+             f"Wrong Answers: {snooze_count}\n"
+             f"Brain Cells Used: {max(1, 10 - snooze_count)}\n"
+             f"Bloodline Disappointment: {bloodline}%\n\n"
+             f"PRODUCTIVITY\n"
+             f"[{'█' * filled}{'░' * empty}] "
+             f"{productivity}%\n\n"
+             f"Scientific Significance: NONE"
+    )
+
+    awake_button = tk.Button(
+        ringing_page,
+        text="I'M AWAKE",
+        font=("Arial", 14, "bold"),
+        command=finish_alarm
+    )
+    awake_button.pack(pady=10)
+
+
+# ---------------- FINISH ALARM ----------------
+
+
+def finish_alarm():
+    global snooze_count
+
+    snooze_count = 0
+
+    for widget in ringing_page.winfo_children():
+        if widget != ringing_title:
+            widget.destroy()
+
+    ringing_page.pack_forget()
+    clock_page.pack(fill="both", expand=True)
 
 def back_to_clock():
     alarm_page.pack_forget()
