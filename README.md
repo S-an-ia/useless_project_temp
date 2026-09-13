@@ -41,7 +41,7 @@ For Hardware:
 ### Implementation
 For Software:
 # Installation
-Download the setup file and allow necessary permissions to install
+Download the setup file on your desktop and allow necessary permissions to install
 
 # Run
 Double click to run the app
