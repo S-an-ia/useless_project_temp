@@ -85,24 +85,35 @@ instruction = tk.Label(
 instruction.pack(pady=10)
 
 
-time_entry = tk.Entry(
+
+
+
+seconds_entry = tk.Entry(
     alarm_page,
     font=("Arial", 20),
     justify="center"
 )
-time_entry.pack(pady=15)
-
-time_entry.insert(0, "08:00 AM")
+seconds_entry.pack(pady=15)
 
 
 def set_alarm():
-    alarm_time = time_entry.get()
+    try:
+        seconds = int(seconds_entry.get())
 
-    print("Alarm set for:", alarm_time)
+        if seconds <= 0:
+            confirmation.config(
+                text="Enter a positive number!"
+            )
+            return
 
-    confirmation.config(
-        text=f"Alarm set for {alarm_time}!"
-    )
+        confirmation.config(
+            text=f"Alarm set for {seconds} seconds!"
+        )
+
+    except ValueError:
+        confirmation.config(
+            text="Please enter seconds only!"
+        )
 
 
 set_button = tk.Button(
