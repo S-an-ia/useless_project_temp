@@ -1,8 +1,22 @@
 import os
+import sys
 import tkinter as tk
 from datetime import datetime
 from PIL import Image, ImageDraw, ImageTk
 import winsound
+
+
+def resource_path(relative_path):
+    """
+    Get absolute path to a resource.
+    Works for both normal Python execution and PyInstaller bundles.
+    PyInstaller extracts assets to sys._MEIPASS at runtime.
+    """
+    if hasattr(sys, '_MEIPASS'):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, relative_path)
 
 
 # ============================================================
@@ -11,8 +25,8 @@ import winsound
 
 W, H = 1280, 720
 
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-IMAGES_DIR = os.path.join(BASE_DIR, "images")
+BASE_DIR = resource_path("")
+IMAGES_DIR = resource_path("images")
 
 
 def find_image(name_keywords):
@@ -20,7 +34,7 @@ def find_image(name_keywords):
     Dynamically search local images directory and project root for an image matching
     any of the provided name keywords. Allows adding new pictures anytime!
     """
-    search_dirs = [IMAGES_DIR, BASE_DIR, r"C:\SANIN\Images"]
+    search_dirs = [IMAGES_DIR, BASE_DIR]
     for s_dir in search_dirs:
         if not os.path.exists(s_dir):
             continue
@@ -47,19 +61,19 @@ def get_image_path(filename, fallback_path):
 
 
 def get_sound_path(filename):
-    local_path = os.path.join(BASE_DIR, filename)
+    local_path = resource_path(filename)
     if os.path.exists(local_path):
         return local_path
     return filename
 
 
-HOME_IMAGE_PATH = get_image_path("home.jpg", r"C:\SANIN\Images\home.jpg")
-BASE_IMAGE_PATH = get_image_path("base.png", r"C:\SANIN\Images\base.png")
-TIME_IMAGE_PATH = get_image_path("time.jpg", r"C:\SANIN\Images\time.jpg")
+HOME_IMAGE_PATH = get_image_path("home.jpg", resource_path(os.path.join("images", "home.jpg")))
+BASE_IMAGE_PATH = get_image_path("base.png", resource_path(os.path.join("images", "base.png")))
+TIME_IMAGE_PATH = get_image_path("time.jpg", resource_path(os.path.join("images", "time.jpg")))
 
 # PAGE 3 IMAGES
-CLOCK_IMAGE_PATH = get_image_path("CLOCK.png", r"C:\SANIN\Images\CLOCK.png")
-RING_IMAGE_PATH = get_image_path("RING.jpg", r"C:\SANIN\Images\RING.jpg")
+CLOCK_IMAGE_PATH = get_image_path("CLOCK.png", resource_path(os.path.join("images", "CLOCK.png")))
+RING_IMAGE_PATH = get_image_path("RING.jpg", resource_path(os.path.join("images", "RING.jpg")))
 
 
 # ============================================================
