@@ -107,38 +107,38 @@ def alarm_ringing():
         ringing_title.config(
             text="⏰ RISE AND SHINE PRINCESS"
         )
-        winsound.Beep(800, 500)
+        winsound.PlaySound("Alarm Beeps.wav",winsound.SND_FILENAME | winsound.SND_ASYNC)
 
     elif snooze_count == 1:
         ringing_title.config(
             text="SIKE YOU SNOOZED HEHE"
         )
-        winsound.Beep(1000, 500)
+        winsound.PlaySound("Alarm Beeps.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
 
     elif snooze_count == 2:
         ringing_title.config(
             text="Okay I'll dismiss next time"
         )
-        winsound.Beep(1200, 700)
+        winsound.PlaySound("Alarm Clock.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
 
     elif snooze_count == 3:
         ringing_title.config(
             text="Next time for sure"
 
         )
-        winsound.Beep(1500, 800)
+        winsound.PlaySound("Alarm Clock.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
 
     elif snooze_count == 4:
         ringing_title.config(
             text="Get Up Plis"
         )
-        winsound.Beep(1800, 1000)
+        winsound.PlaySound("Trumpets.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
 
     else:
         ringing_title.config(
             text="ACHIEVEMENT UNLOCKED!! \n SUCCESSFULLY DISAPPOINTED THE ENTIRE BLOODLINE"
         )
-        winsound.Beep(2000, 1500)
+        winsound.PlaySound("Loud alarm.wav", winsound.SND_FILENAME | winsound.SND_ASYNC)
 def set_alarm():
     try:
         seconds = int(seconds_entry.get())
