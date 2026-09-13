@@ -1538,6 +1538,9 @@ class AlarmPanel(tk.Tk):
             "snoozing": ["snoozing", "snooze"],
             "loser": ["loser"],
             "trumpet": ["trumpet"],
+            "we_made_question": ["we made question", "we made"],
+            "confidential": ["confidential"],
+            "alarm_doesnt_know": ["at this point", "even alarm", "doesnt know"],
             "bloodline": ["bloodline", "disappointed", "report"],
             "ring": ["ring", "alarm", "default"]
         }
@@ -1589,15 +1592,15 @@ class AlarmPanel(tk.Tk):
         elif self.snooze_count == 1:
             title_text = "SIKE YOU SNOOZED HEHE"
             sound_file = "Alarm Beeps.wav"
-            self.update_stage_background("snoozing")
+            self.update_stage_background("ring")
         elif self.snooze_count == 2:
             title_text = "Okay I'll dismiss next time"
             sound_file = "Alarm Clock.wav"
-            self.update_stage_background("snoozing")
+            self.update_stage_background("ring")
         elif self.snooze_count == 3:
             title_text = "Next time for sure"
             sound_file = "Alarm Clock.wav"
-            self.update_stage_background("snoozing")
+            self.update_stage_background("ring")
         elif self.snooze_count == 4:
             title_text = "Get Up Plis"
             sound_file = "Trumpets.wav"
@@ -1747,13 +1750,13 @@ class AlarmPanel(tk.Tk):
                     self.update_stage_background("loser")
                 elif self.snooze_count == 2:
                     message = "INCORRECT.\n\nWe made the question.\nWe still don't know."
-                    self.update_stage_background("snoozing")
+                    self.update_stage_background("we_made_question")
                 elif self.snooze_count == 3:
                     message = "INCORRECT.\n\nThe answer has been\nclassified as confidential."
-                    self.update_stage_background("snoozing")
+                    self.update_stage_background("confidential")
                 else:
                     message = "INCORRECT.\n\nAt this point, nobody knows.\nIncluding the alarm."
-                    self.update_stage_background("snoozing")
+                    self.update_stage_background("alarm_doesnt_know")
 
                 self.update_ringing_title(message, font_size=18)
                 self.after(3000, self.alarm_ringing)
